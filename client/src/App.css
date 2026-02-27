@@ -73,3 +73,15 @@
   text-align: center;
   padding: 4px 8px;
 }
+.problem-difficulty {
+  color: #212121;
+}
+.medium {
+  background-color: #ffd23f;
+}
+.easy {
+  background-color: #5cb338;
+}
+.hard {
+  background-color: #e50046;
+}

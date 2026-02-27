@@ -1,24 +1,63 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-const ProblemForm = () => {
+const ProblemForm = ({ problems, setProblems, setIsOpen }) => {
+  const [formData, setFormData] = useState({
+    title: "",
+    platform: "",
+    difficulty: "",
+    solved: false,
+  });
+  //Change Handler
+  const changeHandler = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
+  //Clear Form Data
+  const clearForm = (event) => {
+    event.preventDefault();
+    setFormData({ title: "", platform: "", difficulty: "" });
+  };
+
+  //submitHandler
+  const submitHandler = (event) => {
+    event.preventDefault();
+    setProblems((prevData) => [...prevData, formData]);
+    setIsOpen(false);
+    //Clearing the form after adding.
+    setFormData({ title: "", platform: "", difficulty: "" });
+  };
+
+  // useEffect(() => {
+  //   console.log(formData);
+  // }, [formData]);
+
   return (
     <>
       <div className="form-box">
         <p>Add a new question</p>
-        <form>
+        <form onSubmit={submitHandler}>
           <div className="field-group">
             <label for="title">Problem Title:</label>
             <input
               type="text"
               id="title"
+              name="title"
               placeholder="Enter the problem title"
+              value={formData.title}
+              onChange={changeHandler}
             />
           </div>
 
           <div className="field-group">
             <label for="platform">Platform: </label>
-            <select name="platform" id="platform">
-              <option value="none" disabled selected className="options">
+            <select
+              name="platform"
+              id="platform"
+              value={formData.platform}
+              onChange={changeHandler}
+            >
+              <option value="" disabled>
                 Select platform
               </option>
 
@@ -29,8 +68,13 @@ const ProblemForm = () => {
           </div>
           <div className="field-group">
             <label for="Difficulty">Difficulty</label>
-            <select name="difficulty" id="difficulty">
-              <option value="none" disabled selected>
+            <select
+              name="difficulty"
+              id="difficulty"
+              value={formData.difficulty}
+              onChange={changeHandler}
+            >
+              <option value="" disabled>
                 Select difficulty
               </option>
               <option value="easy">Easy</option>
@@ -39,8 +83,14 @@ const ProblemForm = () => {
             </select>
           </div>
           <div className="button-group">
-            <button className="submit-button button">Add Problem</button>
-            <button className="clear-button button" type="reset">
+            <button type="submit" className="submit-button button">
+              Add Problem
+            </button>
+            <button
+              className="clear-button button"
+              type="reset"
+              onClick={clearForm}
+            >
               Clear
             </button>
           </div>
