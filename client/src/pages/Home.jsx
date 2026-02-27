@@ -22,10 +22,29 @@ const Home = () => {
     console.log(problems);
   }, [problems]);
   return (
-    <>
-      <AddProblem problems={problems} setProblems={setProblems} />
-      <ProblemList problems={problems} setProblems={setProblems} />
-    </>
+    <div className="container">
+      <header className="header-style">
+        <h1 style={{ display: "flex", justifyContent: "center" }}>
+          DevTracker - DSA Problem Tracker
+        </h1>
+      </header>
+      <main className="main-content">
+        <div className="table-container">
+          <ProblemList problems={problems} setProblems={setProblems} />
+        </div>
+      </main>
+      <aside className="sidebar">
+        <div className="stats-style"></div>
+        <div className="add-problem-style">
+          <AddProblem problems={problems} setProblems={setProblems} />
+        </div>
+      </aside>
+      <footer>
+        <p style={{ display: "flex", justifyContent: "center" }}>
+          &copy; 2026 DevTracker{" "}
+        </p>
+      </footer>
+    </div>
   );
 };
 

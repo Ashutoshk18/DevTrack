@@ -34,53 +34,59 @@ const ProblemForm = ({ problems, setProblems, setIsOpen }) => {
 
   return (
     <>
-      <div className="form-box">
+      <div className="form-content">
         <p>Add a new question</p>
         <form onSubmit={submitHandler}>
           <div className="field-group">
-            <label for="title">Problem Title:</label>
-            <input
-              type="text"
-              id="title"
-              name="title"
-              placeholder="Enter the problem title"
-              value={formData.title}
-              onChange={changeHandler}
-            />
+            <label for="title">
+              Problem Title:{" "}
+              <input
+                type="text"
+                id="title"
+                name="title"
+                placeholder="Enter the problem title"
+                value={formData.title}
+                onChange={changeHandler}
+              />
+            </label>
           </div>
 
           <div className="field-group">
-            <label for="platform">Platform: </label>
-            <select
-              name="platform"
-              id="platform"
-              value={formData.platform}
-              onChange={changeHandler}
-            >
-              <option value="" disabled>
-                Select platform
-              </option>
+            <label for="platform">
+              Platform:{" "}
+              <select
+                name="platform"
+                id="platform"
+                value={formData.platform}
+                onChange={changeHandler}
+              >
+                <option value="" disabled>
+                  Select platform
+                </option>
 
-              <option value="codeforces">Codeforces</option>
-              <option value="leetcode">LeetCode</option>
-              <option value="cses">CSES</option>
-            </select>
+                <option value="codeforces">Codeforces</option>
+                <option value="leetcode">LeetCode</option>
+                <option value="cses">CSES</option>
+              </select>
+            </label>
           </div>
           <div className="field-group">
-            <label for="Difficulty">Difficulty</label>
-            <select
-              name="difficulty"
-              id="difficulty"
-              value={formData.difficulty}
-              onChange={changeHandler}
-            >
-              <option value="" disabled>
-                Select difficulty
-              </option>
-              <option value="easy">Easy</option>
-              <option value="medium">Medium</option>
-              <option value="hard">Hard</option>
-            </select>
+            <label for="Difficulty">
+              Difficulty{" "}
+              <select
+                name="difficulty"
+                id="difficulty"
+                value={formData.difficulty}
+                onChange={changeHandler}
+              >
+                <option value="" disabled>
+                  Select difficulty
+                </option>
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+              </select>
+            </label>
           </div>
           <div className="button-group">
             <button type="submit" className="submit-button button">

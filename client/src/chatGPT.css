@@ -1,0 +1,317 @@
+/* =========================
+   RESET & GLOBAL
+========================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+  background-color: #f4f6f8;
+  color: #1e293b;
+  line-height: 1.5;
+}
+
+/* =========================
+   LAYOUT (Mobile First)
+========================= */
+.container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "header"
+    "main"
+    "aside"
+    "footer";
+  min-height: 100vh;
+}
+
+/* =========================
+   PROBLEM TABLE
+========================= */
+.problem-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.problem-table thead {
+  background-color: #2563eb;
+  color: white;
+}
+
+.problem-table th,
+.problem-table td {
+  padding: 10px 14px;
+  text-align: center;
+}
+
+.problem-table th {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.problem-table tbody tr {
+  border-bottom: 1px solid #e2e8f0;
+  transition: background 0.2s ease;
+}
+
+.problem-table tbody tr:hover {
+  background-color: #f1f5f9;
+}
+
+/* Difficulty Tags */
+.problem-difficulty {
+  font-weight: 600;
+  border-radius: 6px;
+  padding: 4px 8px;
+  display: inline-block;
+  font-size: 0.85rem;
+}
+
+.easy {
+  background-color: #dcfce7;
+  color: #15803d;
+}
+
+.medium {
+  background-color: #fef9c3;
+  color: #854d0e;
+}
+
+.hard {
+  background-color: #fee2e2;
+  color: #b91c1c;
+}
+
+/* =========================
+   SIDEBAR
+========================= */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+
+.stats-style {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  min-height: 200px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* =========================
+   ADD PROBLEM BUTTON / FORM
+========================= */
+.add-problem-style {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  position: relative;
+}
+
+/* Floating Expandable Box */
+.box-form-container {
+  position: relative;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+  overflow: hidden;
+  transition: all 0.4s ease;
+  z-index: 50;
+}
+
+/* Expanded State */
+.box-form-container.box-is-open {
+  width: 320px;
+  height: 380px;
+  border-radius: 16px;
+  background-color: white;
+  padding: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Toggle Button */
+.toggle-button {
+  position: absolute;
+  inset: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  z-index: 5;
+}
+
+/* Shrink button when open */
+.box-is-open .toggle-button {
+  width: 50px;
+  height: 50px;
+  inset: auto 10px auto auto;
+}
+
+/* Symbols */
+.symbol {
+  position: absolute;
+  font-size: 1.8rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.plus {
+  color: white;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.cross {
+  top: 12px;
+  right: 12px;
+  color: #1e293b;
+  transform: scale(0) rotate(-90deg);
+}
+
+/* Animate symbols */
+.box-is-open .plus {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0);
+}
+
+.box-is-open .cross {
+  transform: scale(1) rotate(0deg);
+}
+
+/* =========================
+   FORM CONTENT
+========================= */
+.form-content {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease 0.15s;
+}
+
+.box-is-open .form-content {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Form Styling */
+.form-content p {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+  gap: 6px;
+}
+
+.field-group label {
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.field-group input,
+.field-group select {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  font-size: 0.9rem;
+  outline: none;
+  transition:
+    border 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.field-group input:focus,
+.field-group select:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+/* Buttons */
+.button-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.button {
+  flex: 1;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.submit-button {
+  background-color: #2563eb;
+  color: white;
+}
+
+.submit-button:hover {
+  background-color: #1d4ed8;
+}
+
+.clear-button {
+  background-color: #e2e8f0;
+  color: #1e293b;
+}
+
+.clear-button:hover {
+  background-color: #cbd5e1;
+}
+
+/* =========================
+   RESPONSIVE (Desktop)
+========================= */
+@media (min-width: 768px) {
+  .container {
+    grid-template-columns: 2fr 1fr;
+    grid-template-areas:
+      "header header"
+      "main aside"
+      "footer footer";
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  header {
+    grid-area: header;
+  }
+
+  main {
+    grid-area: main;
+    padding: 20px;
+  }
+
+  aside {
+    grid-area: aside;
+  }
+
+  footer {
+    grid-area: footer;
+  }
+}

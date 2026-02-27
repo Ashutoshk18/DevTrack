@@ -1,24 +1,21 @@
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
+/* Mobile First: Stack everything */
+.container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "header"
+    "main"
+    "aside";
+}
+
 /* ProblemForm */
-.form-box {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  bottom: 8rem;
-  right: 2rem;
-  border: 3px solid #eee;
-  border-radius: 12px;
-  background: white;
-  flex-direction: column;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-  gap: 15px;
-  padding: 20px;
-  height: auto;
-  width: 200px;
-}
+
+/*
 .form-box p {
   font-size: 1.2rem;
 }
@@ -29,20 +26,6 @@
   padding: 0.2rem;
 }
 
-.add-problem-button {
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  height: 4rem;
-  width: 4rem;
-  font-size: 3rem;
-  background-color: green;
-  color: white;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
 .button-group {
   display: flex;
   gap: 5px;
@@ -56,7 +39,7 @@
   font-size: 1rem;
   cursor: pointer;
   height: 2rem;
-}
+} */
 
 /* ProblemList.jsx */
 .problem-table {
@@ -84,4 +67,141 @@
 }
 .hard {
   background-color: #e50046;
+}
+
+/* Sidebar */
+.sidebar {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  height: 100%;
+}
+.stats-style {
+  border: 1px solid green;
+  height: 100%;
+}
+/* Styling of Problem-Box */
+.add-problem-style {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: flex-end;
+  justify-content: flex-start;
+  position: relative;
+  height: 100%;
+}
+.box-form-container {
+  position: relative;
+  height: 4rem;
+  width: 4rem;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: green;
+  transform-origin: bottom right;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 100;
+}
+.toggle-button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+}
+.box-form-container.box-is-open {
+  width: 300px;
+  height: 350px;
+  border-radius: 12px;
+  background-color: white;
+  opacity: 1;
+  pointer-events: auto;
+  padding: 20px;
+  overflow: visible;
+}
+.box-is-open .toggle-button {
+  width: 60px;
+  height: 60px;
+  top: 0;
+  right: 0;
+  left: auto;
+}
+.symbol {
+  position: absolute;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  pointer-events: none;
+}
+.plus {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.cross {
+  top: 15px;
+  right: 15px;
+  color: #333;
+  transform: scale(0) rotate(-90deg);
+}
+.box-is-open .plus {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0);
+}
+
+.box-is-open .cross {
+  opacity: 1;
+  transform: scale(1);
+}
+.hidden {
+  pointer-events: none;
+  opacity: 0;
+}
+
+.form-content {
+  position: relative;
+  z-index: 10; /* Above the toggle button background */
+  opacity: 0;
+  padding: 20px;
+  transition: opacity 0.3s ease;
+  transition-delay: 0.2s; /* Waits for the box to grow before showing text */
+  pointer-events: none; /* Can't click inputs while hidden */
+}
+
+.box-is-open .form-content {
+  pointer-events: auto;
+  opacity: 1;
+}
+@media (min-width: 768px) {
+  .container {
+    display: grid;
+    grid-template-columns: minmax(200px, 1fr) 2fr minmax(200px, 1fr);
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+      "header header header"
+      "main main aside"
+      "footer footer footer";
+    min-height: 100vh;
+    max-width: 1400;
+    margin: 0 auto;
+
+    header {
+      grid-area: header;
+    }
+    main {
+      grid-area: main;
+    }
+    aside {
+      grid-area: aside;
+    }
+    footer {
+      grid-area: footer;
+    }
+  }
 }
